@@ -16,6 +16,7 @@ export function Layout() {
         <div className="brand">Manager Library</div>
         <nav>
           <NavLink to="/books">Catálogo</NavLink>
+          <NavLink to="/members">Socios</NavLink>
         </nav>
         <div className="topbar-right">
           <span className="role-badge">{role}</span>
