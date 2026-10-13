@@ -7,6 +7,7 @@ import { MembersPage } from "./members/MembersPage";
 import { LoansPage } from "./loans/LoansPage";
 import { NewLoanPage } from "./loans/NewLoanPage";
 import { LoanDetailPage } from "./loans/LoanDetailPage";
+import { OverduePage } from "./loans/OverduePage";
 
 export function App() {
   const { isAuthenticated } = useAuth();
@@ -21,6 +22,7 @@ export function App() {
           <Route path="/loans" element={<LoansPage />} />
           <Route path="/loans/new" element={<NewLoanPage />} />
           <Route path="/loans/:id" element={<LoanDetailPage />} />
+          <Route path="/overdue" element={<OverduePage />} />
           <Route path="/" element={<Navigate to="/books" replace />} />
           <Route path="*" element={<Navigate to="/books" replace />} />
         </Route>
