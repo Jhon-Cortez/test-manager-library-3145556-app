@@ -2,8 +2,11 @@ import { request } from "./client";
 import type {
   Book,
   Category,
+  Loan,
   LoginResponse,
   Member,
+  MostBorrowedReport,
+  OverdueItem,
   Paginated,
 } from "./types";
 
@@ -49,6 +52,46 @@ export function createMember(payload: {
   document_number: string;
 }): Promise<Member> {
   return request<Member>("/members", { method: "POST", body: payload });
+}
+
+export interface LoanQuery {
+  from?: string;
+  to?: string;
+  status?: string;
+  member_id?: string;
+  page?: number;
+  size?: number;
+}
+
+export function listLoans(query: LoanQuery = {}): Promise<Paginated<Loan>> {
+  return request<Paginated<Loan>>(`/loans${buildQuery(query)}`);
+}
+
+export function getLoan(id: string): Promise<Loan> {
+  return request<Loan>(`/loans/${id}`);
+}
+
+export function createLoan(payload: {
+  member_id: string;
+  items: { book_id: string }[];
+}): Promise<Loan> {
+  return request<Loan>("/loans", { method: "POST", body: payload });
+}
+
+export function returnLoanItem(loanId: string, itemId: string) {
+  return request<unknown>(`/loans/${loanId}/items/${itemId}/return`, {
+    method: "POST",
+  });
+}
+
+export function listOverdue(): Promise<{ items: OverdueItem[] }> {
+  return request<{ items: OverdueItem[] }>("/loans/overdue");
+}
+
+export function mostBorrowed(from: string, to: string): Promise<MostBorrowedReport> {
+  return request<MostBorrowedReport>(
+    `/reports/most-borrowed${buildQuery({ from, to })}`,
+  );
 }
 
 function buildQuery(params: object): string {
