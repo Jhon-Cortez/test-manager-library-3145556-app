@@ -17,7 +17,7 @@ export function LoginPage() {
     setBusy(true);
     try {
       await login(username, password);
-      navigate("/", { replace: true });
+      navigate("/books", { replace: true });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "No se pudo iniciar sesión.");
     } finally {

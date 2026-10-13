@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth/AuthContext";
 import { LoginPage } from "./auth/LoginPage";
+import { Layout } from "./components/Layout";
+import { BooksPage } from "./books/BooksPage";
 
 export function App() {
   const { isAuthenticated } = useAuth();
@@ -9,7 +11,11 @@ export function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       {isAuthenticated ? (
-        <Route path="*" element={<p>Manager Library</p>} />
+        <Route element={<Layout />}>
+          <Route path="/books" element={<BooksPage />} />
+          <Route path="/" element={<Navigate to="/books" replace />} />
+          <Route path="*" element={<Navigate to="/books" replace />} />
+        </Route>
       ) : (
         <Route path="*" element={<Navigate to="/login" replace />} />
       )}
