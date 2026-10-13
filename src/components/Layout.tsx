@@ -19,6 +19,7 @@ export function Layout() {
           <NavLink to="/members">Socios</NavLink>
           <NavLink to="/loans">Préstamos</NavLink>
           <NavLink to="/overdue">Vencidos</NavLink>
+          <NavLink to="/report">Reporte</NavLink>
         </nav>
         <div className="topbar-right">
           <span className="role-badge">{role}</span>
