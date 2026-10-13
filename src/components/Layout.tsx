@@ -17,6 +17,7 @@ export function Layout() {
         <nav>
           <NavLink to="/books">Catálogo</NavLink>
           <NavLink to="/members">Socios</NavLink>
+          <NavLink to="/loans">Préstamos</NavLink>
         </nav>
         <div className="topbar-right">
           <span className="role-badge">{role}</span>
